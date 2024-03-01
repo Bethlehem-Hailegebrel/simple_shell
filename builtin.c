@@ -1,12 +1,11 @@
 #include "shell.h"
 
 /**
- * _myexit - This Function Automatically exits the shell.
- *
- * @info: this structure holds arguments.
- *
- * Return: exits the shell with each condition satisfied
- * (0) if info.argv[0] != "exit".
+ * _myexit - exits the shell
+ * @info: Structure containing potential arguments. Used to maintain
+ *          constant function prototype.
+ *  Return: exits with a given exit status
+ *         (0) if info.argv[0] != "exit"
  */
 int _myexit(info_t *info)
 {
@@ -31,11 +30,10 @@ int _myexit(info_t *info)
 }
 
 /**
- * _mycd - This Function changes the current directory.
- *
- * @info: this structure holds arguments.
- *
- * Return: Always (0)
+ * _mycd - changes the current directory of the process
+ * @info: Structure containing potential arguments. Used to maintain
+ *          constant function prototype.
+ *  Return: Always 0
  */
 int _mycd(info_t *info)
 {
@@ -82,11 +80,10 @@ int _mycd(info_t *info)
 }
 
 /**
- * _myhelp - This Function changes the current directory.
- *
- * @info: this structure holds arguments.
- *
- * Return: Always (0)
+ * _myhelp - changes the current directory of the process
+ * @info: Structure containing potential arguments. Used to maintain
+ *          constant function prototype.
+ *  Return: Always 0
  */
 int _myhelp(info_t *info)
 {

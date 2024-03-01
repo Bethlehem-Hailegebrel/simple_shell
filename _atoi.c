@@ -1,11 +1,10 @@
 #include "shell.h"
 
 /**
- * interactive - This function checks if the shell is interactive mode.
+ * interactive - returns true if shell is interactive mode
+ * @info: struct address
  *
- * @info: This is the struct address.
- *
- * Return: 1 if the shell is interactive mode if not returns 0.
+ * Return: 1 if interactive mode, 0 otherwise
  */
 int interactive(info_t *info)
 {
@@ -13,72 +12,64 @@ int interactive(info_t *info)
 }
 
 /**
- * _isalpha - This function checks for alphabetic character.
- *
- * @c: the character to be checked.
- *
- * Return: 1 if c is Alphabetic character, 0 otherwise.
- */
-int _isalpha(int c)
-{
-	if ((c >= 97 && c <= 122) || (c >= 65 && c <= 90))
-	{
-		return (1);
-	}
-	else
-	{
-		return (0);
-	}
-	return (0);
-}
-
-/**
- * is_delim - This Function checks if the character is a delimeter.
- *
- * @c: the character to be checked.
- *
- * @delim: the delimeter string.
- *
- * Return: 1 if the character is delimeter if not returns 0.
+ * is_delim - checks if character is a delimeter
+ * @c: the char to check
+ * @delim: the delimeter string
+ * Return: 1 if true, 0 if false
  */
 int is_delim(char c, char *delim)
 {
-	for (; *delim != '\0'; delim++)
-	{
-	if (*delim == c)
-	{
-	return (1);
-	}
-	else
-	{
-	return (0);
-	}
-	}
+	while (*delim)
+		if (*delim++ == c)
+			return (1);
 	return (0);
 }
 
 /**
- * _atoi - This Function converts a string to an integer.
- *
- * @s: the input string.
- *
- * Return: the converted output integer if not returns 0.
+ *_isalpha - checks for alphabetic character
+ *@c: The character to input
+ *Return: 1 if c is alphabetic, 0 otherwise
  */
+
+int _isalpha(int c)
+{
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+		return (1);
+	else
+		return (0);
+}
+
+/**
+ *_atoi - converts a string to an integer
+ *@s: the string to be converted
+ *Return: 0 if no numbers in string, converted number otherwise
+ */
+
 int _atoi(char *s)
 {
-	int sign = 1, result = 0;
+	int i, sign = 1, flag = 0, output;
+	unsigned int result = 0;
 
-	while (*s == ' ')
+	for (i = 0;  s[i] != '\0' && flag != 2; i++)
 	{
-	s++;
+		if (s[i] == '-')
+			sign *= -1;
+
+		if (s[i] >= '0' && s[i] <= '9')
+		{
+			flag = 1;
+			result *= 10;
+			result += (s[i] - '0');
+		}
+		else if (flag == 1)
+			flag = 2;
 	}
-	if (*s == '-' || *s == '+')
-	{
-	sign = (*s++ == '-') ? -1 : 1;
-	}
-	while (*s >= '0' && *s <= '9')
-	{
-	result = result * 10 + (*s++ - '0');
-	}
-	return (sign * result);
+
+	if (sign == -1)
+		output = -result;
+	else
+		output = result;
+
+	return (output);
 }
+
